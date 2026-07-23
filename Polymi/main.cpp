@@ -60,14 +60,17 @@ void quadraticFormula(int a, int b, int c) {
 }
 
 // Soluzioni di un polinomio di primo grado
-void firstDegreeEquation(int tN, int tP) {
+void firstDegreeEquation(int costantTerm, int firstDegreeCoefficient) {
     bool isInconsistent = false, isIdentity = false;
 
-    if (tN > 0 && tP > 0) tN = -tN;
-    else if (tN < 0 && tP > 0) tN = abs(tN);
-    else if ((tN > 0 && tP < 0) || (tN < 0 && tP < 0)) tP = abs(tP);
-    else if (tN == 0 && tP == 0) isInconsistent = true;
-    else if (tN != 0 && tP == 0) isIdentity = true;
+	
+	if ((costantTerm > 0 && firstDegreeCoefficient > 0) || (costantTerm < 0 && firstDegreeCoefficient < 0)) costantTerm = -costantTerm;
+	else if ((costantTerm > 0 && firstDegreeCoefficient < 0) || (costantTerm < 0 && firstDegreeCoefficient > 0)) {
+		firstDegreeCoefficient = abs(firstDegreeCoefficient);
+		costantTerm = abs(costantTerm);
+	}
+    else if (costantTerm == 0 && firstDegreeCoefficient == 0) isInconsistent = true;
+    else if (costantTerm != 0 && firstDegreeCoefficient == 0) isIdentity = true;
 
     if (isIdentity) cout << "\n\033[31mIl polinomio risulta indeterminato!\033[0m";
     else if (isInconsistent) cout << "\n\033[31mIl polinomio risulta impossibile!\033[0m";
